@@ -1,0 +1,70 @@
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .navbar {
+    background-color: #1a2a3a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase; /* Apply uppercase to the whole navbar */
+  }
+  
+  .navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #ffffff;
+    transition: color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .navbar-brand:hover {
+    color: #f0b428;
+  }
+  
+  .navbar-nav {
+    font-size: 1.1rem;
+  }
+  
+  .nav-link {
+    color: #f8f9fa;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .nav-link:hover {
+    background-color: #f0b428;
+    color: #1a2a3a;
+    border-radius: 5px;
+  }
+  
+  .nav-item {
+    margin-left: 15px;
+  }
+  
+  .navbar-toggler {
+    border-color: #f0b428;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #f0b428;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-nav {
+      text-align: center;
+    }
+  
+    .nav-item {
+      margin: 10px 0;
+    }
+  
+    .navbar-toggler {
+      background-color: #f0b428;
+    }
+  }
+  

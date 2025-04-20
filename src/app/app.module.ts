@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateInvoiceComponent } from './components/create-invoice/create-invoice.component';
 import { InvoiceHistoryComponent } from './components/invoice-history/invoice-history.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 // Import other components here
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductMasterComponent,
     CreateInvoiceComponent,
     InvoiceHistoryComponent,
+    NavbarComponent,
     // Add your components here
   ],
   imports: [
