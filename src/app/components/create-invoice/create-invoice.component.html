@@ -1,82 +1,110 @@
 <div class="container mt-4">
-  <h2>Create Invoice</h2>
-  <div class="card p-3 mt-3">
-    <div class="row">
+  <h2 class="mb-4 font-weight-bold text-dark">Create Invoice</h2>
+
+  <!-- Invoice Form -->
+  <div class="card p-4 mt-3 shadow-sm rounded">
+    <div class="row g-4">
       <div class="col-md-6">
-        <label>Customer Name</label>
-        <input type="text" formControlName="customerName" class="form-control" />
+        <label class="form-label font-weight-semibold">Customer Name</label>
+        <input
+          type="text"
+          formControlName="customerName"
+          class="form-control form-control-lg"
+          placeholder="Enter customer name"
+        />
       </div>
       <div class="col-md-6">
-        <label>Date</label>
-        <input type="date" formControlName="date" class="form-control" />
+        <label class="form-label font-weight-semibold">Date</label>
+        <input
+          type="date"
+          formControlName="date"
+          class="form-control form-control-lg"
+        />
       </div>
     </div>
   </div>
 
-  <div class="card p-3 mt-3">
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr>
-          <th>Select</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>GST %</th>
-          <th>Qty</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of products">
-          <td>
-            <input type="checkbox" (change)="onCheckboxChange($event, p)" />
-          </td>
-          <td>{{ p.productName }}</td>
-          <td>{{ p.price }}</td>
-          <td>{{ p.gst }}%</td>
-          <td>
-            <input
-              type="number"
-              class="form-control"
-              min="1"
-              [disabled]="!isProductSelected(p.productID!)"
-              [value]="getQuantity(p.productID!)"
-              (input)="onQuantityChange(p.productID!, $any($event.target).value)"
-            />
-          </td>
-          <td>{{ getTotalAmount(p.productID!) }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="text-end fw-bold">Grand Total: ₹{{ getGrandTotal().toFixed(2) }}</div>
-    <button class="btn btn-success mt-3" (click)="submitInvoice()">Generate Invoice ✅</button>
+  <!-- Product Table -->
+  <div class="card p-4 mt-4 shadow-sm rounded">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>Select</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>GST %</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of products">
+            <td>
+              <input type="checkbox" (change)="onCheckboxChange($event, p)" />
+            </td>
+            <td>{{ p.productName }}</td>
+            <td>₹{{ p.price }}</td>
+            <td>{{ p.gst }}%</td>
+            <td>
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                min="1"
+                [disabled]="!isProductSelected(p.productID!)"
+                [value]="getQuantity(p.productID!)"
+                (input)="onQuantityChange(p.productID!, $any($event.target).value)"
+              />
+            </td>
+            <td>₹{{ getTotalAmount(p.productID!) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-end font-weight-bold fs-5 mt-3">
+      Grand Total: ₹{{ getGrandTotal().toFixed(2) }}
+    </div>
+
+    <div class="text-end mt-4">
+      <button class="btn btn-lg btn-success px-4" (click)="submitInvoice()">
+        Generate Invoice
+      </button>
+    </div>
   </div>
 
-  <div *ngIf="invoiceSaved" class="card mt-4 p-3">
-    <h4>Invoice Summary</h4>
-    <p>Invoice ID: INV_{{ invoiceSummary.invoiceId }}</p>
-    <p>Customer: {{ invoiceSummary.customerName }}</p>
-    <p>Date: {{ invoiceSummary.date }}</p>
+  <!-- Invoice Summary -->
+  <div *ngIf="invoiceSaved" class="card mt-4 p-4 shadow-sm rounded">
+    <h4 class="font-weight-bold text-primary">Invoice Summary</h4>
+    <p><strong>Invoice ID:</strong> INV_{{ invoiceSummary.invoiceId }}</p>
+    <p><strong>Customer:</strong> {{ invoiceSummary.customerName }}</p>
+    <p><strong>Date:</strong> {{ invoiceSummary.date }}</p>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>GST</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of invoiceSummary.invoiceDetails">
-          <td>{{ item.productName }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.gst }}%</td>
-          <td>{{ item.totalAmount.toFixed(2) }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="fw-bold">Grand Total: ₹{{ invoiceSummary.grandTotal.toFixed(2) }}</div>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>GST</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoiceSummary.invoiceDetails">
+            <td>{{ item.productName }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price }}</td>
+            <td>{{ item.gst }}%</td>
+            <td>₹{{ item.totalAmount.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-end mt-3 font-weight-bold fs-5">
+      Grand Total: ₹{{ invoiceSummary.grandTotal.toFixed(2) }}
+    </div>
   </div>
 </div>
